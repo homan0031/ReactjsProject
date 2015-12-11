@@ -123,7 +123,7 @@ var FirstPage = React.createClass({
 	render: function render() {
 		return React.createElement(
 			"div",
-			{ className: "web-container" },
+			{ id: "web-container" },
 			React.createElement(NavBar, null),
 			React.createElement(Jumbotron, null)
 		);

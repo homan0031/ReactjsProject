@@ -64,7 +64,7 @@ var Jumbotron = React.createClass({
 var FirstPage = React.createClass({
 	render: function(){
 		return(
-			<div className="web-container">
+			<div id="web-container">
 				<NavBar/>
 				<Jumbotron/>
 			</div>
