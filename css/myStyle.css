@@ -20,3 +20,11 @@ body{
 .jum-container{
 	padding-top: 100px;
 }
+
+#content{
+	padding-top: 50px;
+}
+
+.filter-form{
+	padding-top: 50px;
+}

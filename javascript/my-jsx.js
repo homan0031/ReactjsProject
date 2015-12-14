@@ -1,26 +1,60 @@
+var CardFilterForm = React.createClass({
+	render: function(){
+		return(
+			<div className="row">
+				<div className="col-md-4 col-md-offset-4 filter-form">
+					<form>
+						<div className="form-group">
+							<label>From Chapter</label>
+							<input className="form-control" type="text" placeholder='e.g. A1' />
+						</div>
+						<div className="form-group">
+							<label>To Chapter</label>
+							<input className="form-control" type="text" placeholder='e.g. A2' />
+						</div>
+						<div align='right'>
+	          	<div className="btn btn-primary">Go</div>
+	        	</div>
+					</form>
+				</div>
+			</div>
+		);
+	}
+});
+
 var NavDropDownList = React.createClass({
 	render: function(){
-		var createItem = function(items){
+		var createItem = function(section){
 			return (
-				<li key={items}>
-					<a href="#" id={items}>{items}</a>
+				<li key={section}>
+					<a href="#" id={section}>{section}</a>
 				</li>
 			);
 		};
 
-		return <ul className="dropdown-menu" onClick={this.props.onClick}>{this.props.items.map(createItem)}</ul>
+		return <ul className="dropdown-menu" onClick={this.props.onClick}>{this.props.sectionList.map(createItem)}</ul>
 	}
 });
 
 var NavBar = React.createClass({
 	getInitialState: function(){
-		return {items: ["Chapter A", "Chapter B"]};
+		return {sectionList: ["Chapter A", "Chapter B"]};
+	},
+	//-------------------Nav Menu Section------------------------------------------
+	//when Home Button is clicked
+	returnHomePage: function(){
+		ReactDOM.render(<Jumbotron/>, document.getElementById("content"));
 	},
 
-
+	//when section dropdown menu is clicked
 	handleSecSel: function(e){
-		ReactDOM.render(<div>HI</div>, document.getElementById("jum-area"));
+		ReactDOM.render(<div> {e.target.id} </div>, document.getElementById("content"));
 	},
+
+	randomTest: function(e){
+		ReactDOM.render(<CardFilterForm/>, document.getElementById("content"));
+	},
+	//-----------------------------------------------------------------------------
 
 	render: function(){
 		return (
@@ -32,19 +66,20 @@ var NavBar = React.createClass({
 						<span className="icon-bar" />
 						<span className="icon-bar" />
 					</button>
-					<a className="navbar-brand" href="#">TMS</a>
+					<a className="navbar-brand" href="#" onClick={this.returnHomePage}>TMS</a>
 				</div>
 
 				<div className="collapse navbar-collapse" id="navMenuList">
 		      <ul className="nav navbar-nav">
 		      	<li className="dropdown">
-  						<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TMS Review<span className="caret"></span></a>
-  						<NavDropDownList items={this.state.items} onClick={this.handleSecSel} />
+  						<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+  							TMS Review<span className="caret"></span>
+  						</a>
+  						<NavDropDownList sectionList={this.state.sectionList} onClick={this.handleSecSel} />
 						</li>
 		        <li>
-		        	<a href="#">Random Test</a>
+		        	<a href="#" onClick={this.randomTest}>Random Test</a>
 		        </li>
-	
 		      </ul>
 		    </div>
 			</nav>
@@ -66,15 +101,5 @@ var Jumbotron = React.createClass({
 	}
 });
 
-var FirstPage = React.createClass({
-	render: function(){
-		return(
-			<div id="web-container">
-				<NavBar/>
-				<Jumbotron/>
-			</div>
-		);
-	}
-});
-
-ReactDOM.render(<FirstPage/>, document.getElementById("content"));
+ReactDOM.render(<NavBar/>, document.getElementById("nav-bar-area"));
+ReactDOM.render(<Jumbotron/>, document.getElementById("content"));

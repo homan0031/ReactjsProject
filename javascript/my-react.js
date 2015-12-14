@@ -1,17 +1,65 @@
 "use strict";
 
+var CardFilterForm = React.createClass({
+	displayName: "CardFilterForm",
+
+	render: function render() {
+		return React.createElement(
+			"div",
+			{ className: "row" },
+			React.createElement(
+				"div",
+				{ className: "col-md-4 col-md-offset-4 filter-form" },
+				React.createElement(
+					"form",
+					null,
+					React.createElement(
+						"div",
+						{ className: "form-group" },
+						React.createElement(
+							"label",
+							null,
+							"From Chapter"
+						),
+						React.createElement("input", { className: "form-control", type: "text", placeholder: "e.g. A1" })
+					),
+					React.createElement(
+						"div",
+						{ className: "form-group" },
+						React.createElement(
+							"label",
+							null,
+							"To Chapter"
+						),
+						React.createElement("input", { className: "form-control", type: "text", placeholder: "e.g. A2" })
+					),
+					React.createElement(
+						"div",
+						{ align: "right" },
+						React.createElement(
+							"div",
+							{ className: "btn btn-primary" },
+							"Go"
+						)
+					)
+				)
+			)
+		);
+	}
+});
+
 var NavDropDownList = React.createClass({
 	displayName: "NavDropDownList",
 
 	render: function render() {
-		var createItem = function createItem(items) {
+		var createItem = function createItem(section) {
 			return React.createElement(
 				"li",
-				{ key: items },
+				{ key: section },
 				React.createElement(
 					"a",
-					{ href: "#", id: items },
-					items
+					{ href: "#", id: section },
+					section
 				)
 			);
 		};
@@ -19,7 +67,7 @@ var NavDropDownList = React.createClass({
 		return React.createElement(
 			"ul",
 			{ className: "dropdown-menu", onClick: this.props.onClick },
-			this.props.items.map(createItem)
+			this.props.sectionList.map(createItem)
 		);
 	}
 });
@@ -28,16 +76,29 @@ var NavBar = React.createClass({
 	displayName: "NavBar",
 
 	getInitialState: function getInitialState() {
-		return { items: ["Chapter A", "Chapter B"] };
+		return { sectionList: ["Chapter A", "Chapter B"] };
+	},
+	//-------------------Nav Menu Section------------------------------------------
+	//when Home Button is clicked
+	returnHomePage: function returnHomePage() {
+		ReactDOM.render(React.createElement(Jumbotron, null), document.getElementById("content"));
 	},
 
+	//when section dropdown menu is clicked
 	handleSecSel: function handleSecSel(e) {
 		ReactDOM.render(React.createElement(
 			"div",
 			null,
-			"HI"
-		), document.getElementById("jum-area"));
+			" ",
+			e.target.id,
+			" "
+		), document.getElementById("content"));
 	},
+
+	randomTest: function randomTest(e) {
+		ReactDOM.render(React.createElement(CardFilterForm, null), document.getElementById("content"));
+	},
+	//-----------------------------------------------------------------------------
 
 	render: function render() {
 		return React.createElement(
@@ -55,7 +116,7 @@ var NavBar = React.createClass({
 				),
 				React.createElement(
 					"a",
-					{ className: "navbar-brand", href: "#" },
+					{ className: "navbar-brand", href: "#", onClick: this.returnHomePage },
 					"TMS"
 				)
 			),
@@ -74,14 +135,14 @@ var NavBar = React.createClass({
 							"TMS Review",
 							React.createElement("span", { className: "caret" })
 						),
-						React.createElement(NavDropDownList, { items: this.state.items, onClick: this.handleSecSel })
+						React.createElement(NavDropDownList, { sectionList: this.state.sectionList, onClick: this.handleSecSel })
 					),
 					React.createElement(
 						"li",
 						null,
 						React.createElement(
 							"a",
-							{ href: "#" },
+							{ href: "#", onClick: this.randomTest },
 							"Random Test"
 						)
 					)
@@ -125,18 +186,6 @@ var Jumbotron = React.createClass({
 	}
 });
 
-var FirstPage = React.createClass({
-	displayName: "FirstPage",
-
-	render: function render() {
-		return React.createElement(
-			"div",
-			{ id: "web-container" },
-			React.createElement(NavBar, null),
-			React.createElement(Jumbotron, null)
-		);
-	}
-});
-
-ReactDOM.render(React.createElement(FirstPage, null), document.getElementById("content"));
+ReactDOM.render(React.createElement(NavBar, null), document.getElementById("nav-bar-area"));
+ReactDOM.render(React.createElement(Jumbotron, null), document.getElementById("content"));
 /*Brand and toggle get grouped for better mobile display*/
