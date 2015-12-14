@@ -34,7 +34,7 @@ var NavBar = React.createClass({
 	render: function render() {
 		return React.createElement(
 			"nav",
-			{ className: "navbar navbar-default" },
+			{ className: "navbar navbar-default navbar-fixed-top" },
 			React.createElement(
 				"div",
 				{ className: "navbar-header" },
