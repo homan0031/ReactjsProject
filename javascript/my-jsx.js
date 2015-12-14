@@ -3,18 +3,23 @@ var NavDropDownList = React.createClass({
 		var createItem = function(items){
 			return (
 				<li key={items}>
-					<a href="#">{items}</a>
+					<a href="#" id={items}>{items}</a>
 				</li>
 			);
 		};
 
-		return <ul className="dropdown-menu">{this.props.items.map(createItem)}</ul>
+		return <ul className="dropdown-menu" onClick={this.props.onClick}>{this.props.items.map(createItem)}</ul>
 	}
 });
 
 var NavBar = React.createClass({
 	getInitialState: function(){
 		return {items: ["Chapter A", "Chapter B"]};
+	},
+
+
+	handleSecSel: function(e){
+		ReactDOM.render(<div>HI</div>, document.getElementById("jum-area"));
 	},
 
 	render: function(){
@@ -34,7 +39,7 @@ var NavBar = React.createClass({
 		      <ul className="nav navbar-nav">
 		      	<li className="dropdown">
   						<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TMS Review<span className="caret"></span></a>
-  						<NavDropDownList items={this.state.items} />
+  						<NavDropDownList items={this.state.items} onClick={this.handleSecSel} />
 						</li>
 		        <li>
 		        	<a href="#">Random Test</a>
@@ -51,7 +56,7 @@ var Jumbotron = React.createClass({
 	render: function(){
 		return(
 			<div className="jumbotron">
-			  <div className="container">
+			  <div className="container jum-container">
 			    <h1>Hello, world!</h1>
 			    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 			    <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>

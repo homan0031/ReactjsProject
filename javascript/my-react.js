@@ -10,7 +10,7 @@ var NavDropDownList = React.createClass({
 				{ key: items },
 				React.createElement(
 					"a",
-					{ href: "#" },
+					{ href: "#", id: items },
 					items
 				)
 			);
@@ -18,7 +18,7 @@ var NavDropDownList = React.createClass({
 
 		return React.createElement(
 			"ul",
-			{ className: "dropdown-menu" },
+			{ className: "dropdown-menu", onClick: this.props.onClick },
 			this.props.items.map(createItem)
 		);
 	}
@@ -29,6 +29,14 @@ var NavBar = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return { items: ["Chapter A", "Chapter B"] };
+	},
+
+	handleSecSel: function handleSecSel(e) {
+		ReactDOM.render(React.createElement(
+			"div",
+			null,
+			"HI"
+		), document.getElementById("jum-area"));
 	},
 
 	render: function render() {
@@ -66,7 +74,7 @@ var NavBar = React.createClass({
 							"TMS Review",
 							React.createElement("span", { className: "caret" })
 						),
-						React.createElement(NavDropDownList, { items: this.state.items })
+						React.createElement(NavDropDownList, { items: this.state.items, onClick: this.handleSecSel })
 					),
 					React.createElement(
 						"li",
@@ -92,7 +100,7 @@ var Jumbotron = React.createClass({
 			{ className: "jumbotron" },
 			React.createElement(
 				"div",
-				{ className: "container" },
+				{ className: "container jum-container" },
 				React.createElement(
 					"h1",
 					null,
