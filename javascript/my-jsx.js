@@ -19,15 +19,21 @@ var AllCardViewer = React.createClass({
 	},
 
 	render: function(){
-		var chunkList = _.chunk(this.state.contentList, 2);
+		var chunkList = _.chunk(this.state.contentList, 3);
 
-		var createCard = function(content, index){
+		var createCol = function(content){
 			return (
 				<TMSCard content={content} />
 			);
 		};
+
+		var createRow = function(subArry){
+			return(
+					<div className="row">{subArry.map(createCol)}</div>
+			);
+		}
 		
-		return (<div className="row">{this.state.contentList.map(createCard)}</div>);
+		return (<div>{chunkList.map(createRow)}</div>);
 	}
 });
 
@@ -121,12 +127,29 @@ var NavBar = React.createClass({
 });
 
 var Jumbotron = React.createClass({
+	// getInitialState: function() {
+ //    return {dailyVerse: []};
+ //  },
+
+	// componentDidMount: function() {
+		// $.ajax({
+		// 	url:'http://dailyverses.net/getdailyverse.ashx?language=en&isdirect=1&url=' + window.location.hostname,
+		// 	dataType: 'JSONP',
+		// 	success:function(verse){
+		// 		console.log(verse);
+		// 	}.bind(this),
+  //     error: function(xhr, status, err) {
+  //       console.error(this.props.url, status, err.toString());
+  //     }.bind(this)
+		// });
+  // },
+
 	render: function(){
 		return(
 			<div className="jumbotron">
 			  <div className="container jum-container">
 			    <h1>Hello, world!</h1>
-			    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			    <p>Under Develop</p>
 			  </div>
 			</div>
 		);
