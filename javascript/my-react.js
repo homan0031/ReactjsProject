@@ -6,7 +6,7 @@ var TMSCard = React.createClass({
 	render: function render() {
 		return React.createElement(
 			"div",
-			{ className: "tms-card col-md-4 col-sm-12" },
+			{ className: "tms-card col-md-4" },
 			React.createElement(
 				"div",
 				{ className: "card-title" },
@@ -30,7 +30,7 @@ var TMSCard = React.createClass({
 			React.createElement("br", null),
 			React.createElement(
 				"div",
-				null,
+				{ className: "tms-bottom" },
 				"Topic"
 			)
 		);
@@ -215,23 +215,6 @@ var NavBar = React.createClass({
 
 var Jumbotron = React.createClass({
 	displayName: "Jumbotron",
-
-	// getInitialState: function() {
-	//    return {dailyVerse: []};
-	//  },
-
-	// componentDidMount: function() {
-	// $.ajax({
-	// 	url:'http://dailyverses.net/getdailyverse.ashx?language=en&isdirect=1&url=' + window.location.hostname,
-	// 	dataType: 'JSONP',
-	// 	success:function(verse){
-	// 		console.log(verse);
-	// 	}.bind(this),
-	//     error: function(xhr, status, err) {
-	//       console.error(this.props.url, status, err.toString());
-	//     }.bind(this)
-	// });
-	// },
 
 	render: function render() {
 		return React.createElement(
