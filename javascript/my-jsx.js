@@ -1,8 +1,41 @@
+var TMSCard = React.createClass({
+	render: function(){
+		return (
+			<div className="tms-card col-md-4 col-sm-12">
+				<div className="card-title">Title</div>
+				<div>5:17</div>
+				<div>{this.props.content}</div>
+				<div className="float-right">5:17</div>
+				<br/>
+				<div>Topic</div>
+			</div>
+		);
+	}
+});
+
+var AllCardViewer = React.createClass({
+	getInitialState: function(){
+		return {contentList: ["Content A Content A Content A Content A", "Content B", "Content A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content A"]};
+	},
+
+	render: function(){
+		var chunkList = _.chunk(this.state.contentList, 2);
+
+		var createCard = function(content, index){
+			return (
+				<TMSCard content={content} />
+			);
+		};
+		
+		return (<div className="row">{this.state.contentList.map(createCard)}</div>);
+	}
+});
+
 var CardFilterForm = React.createClass({
 	render: function(){
 		return(
 			<div className="row">
-				<div className="col-md-4 col-md-offset-4 filter-form">
+				<div className="col-sm-4 col-sm-offset-4 filter-form">
 					<form>
 						<div className="form-group">
 							<label>From Chapter</label>
@@ -48,7 +81,7 @@ var NavBar = React.createClass({
 
 	//when section dropdown menu is clicked
 	handleSecSel: function(e){
-		ReactDOM.render(<div> {e.target.id} </div>, document.getElementById("content"));
+		ReactDOM.render(<AllCardViewer/>, document.getElementById("content"));
 	},
 
 	randomTest: function(e){
@@ -94,7 +127,6 @@ var Jumbotron = React.createClass({
 			  <div className="container jum-container">
 			    <h1>Hello, world!</h1>
 			    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-			    <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 			  </div>
 			</div>
 		);

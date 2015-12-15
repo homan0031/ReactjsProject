@@ -1,5 +1,64 @@
 "use strict";
 
+var TMSCard = React.createClass({
+	displayName: "TMSCard",
+
+	render: function render() {
+		return React.createElement(
+			"div",
+			{ className: "tms-card col-md-4 col-sm-12" },
+			React.createElement(
+				"div",
+				{ className: "card-title" },
+				"Title"
+			),
+			React.createElement(
+				"div",
+				null,
+				"5:17"
+			),
+			React.createElement(
+				"div",
+				null,
+				this.props.content
+			),
+			React.createElement(
+				"div",
+				{ className: "float-right" },
+				"5:17"
+			),
+			React.createElement("br", null),
+			React.createElement(
+				"div",
+				null,
+				"Topic"
+			)
+		);
+	}
+});
+
+var AllCardViewer = React.createClass({
+	displayName: "AllCardViewer",
+
+	getInitialState: function getInitialState() {
+		return { contentList: ["Content A Content A Content A Content A", "Content B", "Content A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content A"] };
+	},
+
+	render: function render() {
+		var chunkList = _.chunk(['a', 'b', 'c', 'd'], 2);
+
+		var createCard = function createCard(content, index) {
+			return React.createElement(TMSCard, { content: content });
+		};
+
+		return React.createElement(
+			"div",
+			{ className: "row" },
+			this.state.contentList.map(createCard)
+		);
+	}
+});
+
 var CardFilterForm = React.createClass({
 	displayName: "CardFilterForm",
 
@@ -9,7 +68,7 @@ var CardFilterForm = React.createClass({
 			{ className: "row" },
 			React.createElement(
 				"div",
-				{ className: "col-md-4 col-md-offset-4 filter-form" },
+				{ className: "col-sm-4 col-sm-offset-4 filter-form" },
 				React.createElement(
 					"form",
 					null,
@@ -86,13 +145,7 @@ var NavBar = React.createClass({
 
 	//when section dropdown menu is clicked
 	handleSecSel: function handleSecSel(e) {
-		ReactDOM.render(React.createElement(
-			"div",
-			null,
-			" ",
-			e.target.id,
-			" "
-		), document.getElementById("content"));
+		ReactDOM.render(React.createElement(AllCardViewer, null), document.getElementById("content"));
 	},
 
 	randomTest: function randomTest(e) {
@@ -171,15 +224,6 @@ var Jumbotron = React.createClass({
 					"p",
 					null,
 					"This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information."
-				),
-				React.createElement(
-					"p",
-					null,
-					React.createElement(
-						"a",
-						{ className: "btn btn-primary btn-lg", href: "#", role: "button" },
-						"Learn more"
-					)
 				)
 			)
 		);
