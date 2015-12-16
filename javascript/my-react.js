@@ -4,34 +4,37 @@ var TMSCard = React.createClass({
 	displayName: "TMSCard",
 
 	render: function render() {
+		var colClass = "col-md-6 tms-card";
+		if (this.props.index % 2 == 0) {
+			colClass = "col-md-6 col-md-offset-6 tms-card";
+		}
+
 		return React.createElement(
 			"div",
-			{ className: "tms-card col-md-4" },
+			{ className: colClass },
 			React.createElement(
 				"div",
-				{ className: "card-title" },
-				"Title"
-			),
-			React.createElement(
-				"div",
-				null,
-				"5:17"
-			),
-			React.createElement(
-				"div",
-				null,
-				this.props.content
-			),
-			React.createElement(
-				"div",
-				{ className: "float-right" },
-				"5:17"
-			),
-			React.createElement("br", null),
-			React.createElement(
-				"div",
-				{ className: "tms-bottom" },
-				"Topic"
+				{ className: "card-container" },
+				React.createElement(
+					"div",
+					{ className: "card-title" },
+					"標題"
+				),
+				React.createElement(
+					"div",
+					null,
+					this.props.content
+				),
+				React.createElement(
+					"div",
+					null,
+					"5:17"
+				),
+				React.createElement(
+					"div",
+					{ className: "tms-bottom" },
+					"主題"
+				)
 			)
 		);
 	}
@@ -41,28 +44,37 @@ var AllCardViewer = React.createClass({
 	displayName: "AllCardViewer",
 
 	getInitialState: function getInitialState() {
-		return { contentList: ["Content A Content A Content A Content A", "Content B", "Content A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content A"] };
+		return { contentList: ["內容內容內容內容內容內容內容內容", "內容內容內容", "內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容"] };
 	},
 
 	render: function render() {
-		var chunkList = _.chunk(this.state.contentList, 3);
+		// var chunkList = _.chunk(this.state.contentList, 3);
 
-		var createCol = function createCol(content) {
-			return React.createElement(TMSCard, { content: content });
-		};
+		// var createCol = function(content){
+		// 	return (
+		// 		<TMSCard content={content} />
+		// 	);
+		// };
 
-		var createRow = function createRow(subArry) {
+		// var createRow = function(subArry){
+		// 	return(
+		// 			<div className="row">{subArry.map(createCol)}</div>
+		// 	);
+		// }
+
+		// return (<div>{chunkList.map(createRow)}</div>);
+		var createRow = function createRow(content, index) {
 			return React.createElement(
 				"div",
 				{ className: "row" },
-				subArry.map(createCol)
+				React.createElement(TMSCard, { content: content, index: index })
 			);
 		};
 
 		return React.createElement(
 			"div",
 			null,
-			chunkList.map(createRow)
+			this.state.contentList.map(createRow)
 		);
 	}
 });
@@ -105,7 +117,7 @@ var CardFilterForm = React.createClass({
 						{ align: "right" },
 						React.createElement(
 							"div",
-							{ className: "btn btn-primary" },
+							{ className: "btn btn-primary", onClick: this.props.onClick },
 							"Go"
 						)
 					)
@@ -226,12 +238,12 @@ var Jumbotron = React.createClass({
 				React.createElement(
 					"h1",
 					null,
-					"Hello, world!"
+					"Welcome to TMS"
 				),
 				React.createElement(
 					"p",
 					null,
-					"Under Develop"
+					"This website is Under Development......"
 				)
 			)
 		);

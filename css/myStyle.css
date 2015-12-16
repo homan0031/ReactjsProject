@@ -10,8 +10,9 @@ body{
 .tms-card{
   /*box-shadow: -4px 0 4px rgba(69, 63, 63, 0.2), 4px 0 4px rgba(0, 0, 0, 0.56);
   border: 1px solid black;*/
-  border-bottom: 2px dotted #c8c8c8;
-  border-left: 2px dotted #c8c8c8;
+/*  border: 2px dotted #c8c8c8;*/
+	border-bottom: 2px dotted #c8c8c8;
+	margin-top: 15px;
 }
 
 .tms-card div{
@@ -23,11 +24,12 @@ body{
 }
 
 .card-title{
-  font-size: 17px;
+  font-size: 30px;
   font-weight: bold;
 }
 
-.card-view-container{
+.card-container{
+	/*width: 50%;*/
 }
 
 #content{
@@ -48,6 +50,9 @@ body{
     width: 100%;
     height: 100%;
     margin: 0px;
+    background-color: white;
+/*    background-image: url("../img/night.jpg");
+    background-size: cover;*/
 }
 
 .jum-container{

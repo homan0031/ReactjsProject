@@ -1,13 +1,18 @@
 var TMSCard = React.createClass({
 	render: function(){
+		var colClass = "col-md-6 tms-card"
+		if(this.props.index%2 == 0){
+			colClass = "col-md-offset-6 col-md-6 tms-card";
+		}
+
 		return (
-			<div className="tms-card col-md-4">
-				<div className="card-title">Title</div>
-				<div>5:17</div>
-				<div>{this.props.content}</div>
-				<div className="float-right">5:17</div>
-				<br/>
-				<div className="tms-bottom">Topic</div>
+			<div className={colClass}>
+				<div className="card-container">
+					<div className="card-title">標題</div>
+					<div>{this.props.content}</div>
+					<div>5:17</div>
+					<div className="tms-bottom">主題</div>
+				</div>
 			</div>
 		);
 	}
@@ -15,25 +20,34 @@ var TMSCard = React.createClass({
 
 var AllCardViewer = React.createClass({
 	getInitialState: function(){
-		return {contentList: ["Content A Content A Content A Content A", "Content B", "Content A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content AContent A Content A Content A Content A"]};
+		return {contentList: ["內容內容內容內容內容內容內容內容", "內容內容內容", "內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容"]};
 	},
 
 	render: function(){
-		var chunkList = _.chunk(this.state.contentList, 3);
+		// var chunkList = _.chunk(this.state.contentList, 3);
 
-		var createCol = function(content){
-			return (
-				<TMSCard content={content} />
+		// var createCol = function(content){
+		// 	return (
+		// 		<TMSCard content={content} />
+		// 	);
+		// };
+
+		// var createRow = function(subArry){
+		// 	return(
+		// 			<div className="row">{subArry.map(createCol)}</div>
+		// 	);
+		// }
+		
+		// return (<div>{chunkList.map(createRow)}</div>);
+		var createRow = function(content, index){
+			return(
+				<div className="row">
+					<TMSCard content={content} index={index}/>
+				</div>
 			);
 		};
 
-		var createRow = function(subArry){
-			return(
-					<div className="row">{subArry.map(createCol)}</div>
-			);
-		}
-		
-		return (<div>{chunkList.map(createRow)}</div>);
+		return (<div>{this.state.contentList.map(createRow)}</div>);
 	}
 });
 
@@ -52,7 +66,7 @@ var CardFilterForm = React.createClass({
 							<input className="form-control" type="text" placeholder='e.g. A2' />
 						</div>
 						<div align='right'>
-	          	<div className="btn btn-primary">Go</div>
+	          	<div className="btn btn-primary" onClick={this.props.onClick}>Go</div>
 	        	</div>
 					</form>
 				</div>
@@ -131,8 +145,8 @@ var Jumbotron = React.createClass({
 		return(
 			<div className="jumbotron">
 			  <div className="container jum-container">
-			    <h1>Hello, world!</h1>
-			    <p>Under Develop</p>
+			    <h1>Welcome to TMS</h1>
+			    <p>This website is Under Development......</p>
 			  </div>
 			</div>
 		);
