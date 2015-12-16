@@ -6,7 +6,7 @@ var TMSCard = React.createClass({
 	render: function render() {
 		var colClass = "col-md-6 tms-card";
 		if (this.props.index % 2 == 0) {
-			colClass = "col-md-6 col-md-offset-6 tms-card";
+			colClass = "col-md-offset-6 col-md-6 tms-card";
 		}
 
 		return React.createElement(
@@ -198,7 +198,7 @@ var NavBar = React.createClass({
 				{ className: "collapse navbar-collapse", id: "navMenuList" },
 				React.createElement(
 					"ul",
-					{ className: "nav navbar-nav" },
+					{ className: "nav navbar-nav navbar-right" },
 					React.createElement(
 						"li",
 						{ className: "dropdown" },

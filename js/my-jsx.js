@@ -123,7 +123,7 @@ var NavBar = React.createClass({
 				</div>
 
 				<div className="collapse navbar-collapse" id="navMenuList">
-		      <ul className="nav navbar-nav">
+		      <ul className="nav navbar-nav navbar-right">
 		      	<li className="dropdown">
   						<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
   							TMS Review<span className="caret"></span>
